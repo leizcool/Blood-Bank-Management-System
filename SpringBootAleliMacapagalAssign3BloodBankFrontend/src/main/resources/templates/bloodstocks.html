@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Blood Stocks</title>
+</head>
+<body>
+    <!-- Home Link -->
+    <a href="/">Home</a> <!-- Links to index.html -->
+    
+    <h1>Blood Stocks List</h1>
+
+    <!-- Add Blood Stock Form -->
+    <form action="/bloodstocks" method="POST">
+        <label for="bloodGroup">Blood Group:</label>
+        <input type="text" id="bloodGroup" name="bloodGroup" required><br><br>
+        <label for="quantity">Quantity:</label>
+        <input type="text" id="quantity" name="quantity" required><br><br>
+        <label for="bestBefore">Best Before:</label>
+        <input type="text" id="bestBefore" name="bestBefore" placeholder="yyyy-MM-dd" required><br><br>
+        <label for="status">Status:</label>
+        <input type="text" id="status" name="status" required><br><br>
+        <button type="submit">Add Blood Stock</button>
+    </form>
+
+    <!-- Table for Displaying Blood Banks -->    
+    <h2>Current Blood Stocks</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Blood Group</th>
+                <th>Quantity</th>
+                <th>Best Before</th>                
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="bloodstock : ${bloodstocks}">
+            <td th:text="${bloodstock.id}"></td>
+            <td th:text="${bloodstock.bloodGroup}"></td>
+            <td th:text="${bloodstock.quantity}"></td>
+            <td th:text="${bloodstock.bestBefore}"></td>
+            <td th:text="${bloodstock.status}"></td>                            
+            <td>
+            	<!-- Edit Button --> 
+            	<a th:href="@{/bloodstocks/edit/{id}(id=${bloodstock.id})}">Edit</a>
+            	
+            	<!-- Delete Button -->
+            	<a th:href="@{/bloodstocks/delete/{id}(id=${bloodstock.id})}" onclick="return confirm('Are you sure?')">Delete</a> 
+           	</td>               
+        </tr>
+        <tr th:if="${#lists.isEmpty(bloodstocks)}">
+        	<td colspan="8">No Blood Stocks available.</td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

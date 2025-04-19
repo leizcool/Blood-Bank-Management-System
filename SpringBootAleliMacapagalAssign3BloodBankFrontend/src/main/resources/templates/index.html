@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Blood Bank Information System</title>
+</head>
+<body>
+    <h1>Welcome to the Blood Bank Information System</h1>
+    <p>Please choose one of the following options:</p>
+    
+    <ul>
+        <li><a th:href="@{/seekers}">Seeker Form</a></li>
+        <li><a th:href="@{/bloodbanks}">Blood Bank Form</a></li>
+        <li><a th:href="@{/bloodstocks}">Blood Stock Form</a></li>
+    </ul>
+</body>
+</html>

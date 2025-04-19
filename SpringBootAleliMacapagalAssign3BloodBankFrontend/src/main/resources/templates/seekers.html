@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Seekers</title>
+</head>
+<body>
+    <!-- Home Link -->
+    <a href="/">Home</a> <!-- Links to index.html -->
+    
+    <h1>Seeker/Patient List</h1>
+
+    <!-- Add Seeker Form -->
+    <form action="/seekers" method="POST">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required><br><br>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required><br><br>
+        <label for="gender">Gender:</label>
+        <input type="text" id="gender" name="gender" required><br><br>        
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required><br><br>
+        <label for="bloodGroup">Blood Group:</label>
+        <input type="text" id="bloodGroup" name="bloodGroup" required><br><br>
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required><br><br>
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" required><br><br>
+        <button type="submit">Add Seeker</button>
+    </form>
+
+    <!-- Table for Displaying Seekers -->
+    <h2>Current Seekers</h2>
+    <table border="1">
+    	<thead>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Blood Group</th>
+            <th>City</th>
+            <th>Phone</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="seeker : ${seekers}">
+            <td th:text="${seeker.id}"></td>
+            <td th:text="${seeker.firstName}"></td>
+            <td th:text="${seeker.lastName}"></td>
+            <td th:text="${seeker.gender}"></td>
+            <td th:text="${seeker.age}"></td>
+            <td th:text="${seeker.bloodGroup}"></td>
+            <td th:text="${seeker.city}"></td>
+            <td th:text="${seeker.phone}"></td>
+            <td>
+                <!-- Edit Button -->
+                <a th:href="@{/seekers/edit/{id}(id=${seeker.id})}">Edit</a>
+
+                <!-- Delete Button -->
+                <a th:href="@{/seekers/delete/{id}(id=${seeker.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(seekers)}">
+        	<td colspan="8">No seekers available.</td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

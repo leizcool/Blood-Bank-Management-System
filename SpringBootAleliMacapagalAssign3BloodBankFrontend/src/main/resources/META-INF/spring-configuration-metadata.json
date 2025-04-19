@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "backend.api.url",
+      "type": "java.lang.String",
+      "description": "URL of the Blood Bank Information System backend"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Blood Stock</title>
+</head>
+<body>
+    <h1>Edit Blood Stock</h1>
+
+    <form th:action="@{/bloodstocks/update/{id}(id=${bloodstock.id})}" th:object="${bloodstock}" method="post">
+        <label for="bloodGroup">Blood Group:</label>
+        <input type="text" id="bloodGroup" name="bloodGroup" th:value="${bloodstock.bloodGroup}" required><br><br>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" th:value="${bloodstock.quantity}" required><br><br>
+
+        <label for="bestBefore">Best Before:</label>
+        <input type="date" id="bestBefore" name="bestBefore" th:value="${bloodstock.bestBefore}" required><br><br>
+
+        <label for="status">Status:</label>
+        <input type="text" id="status" name="status" th:value="${bloodstock.status}" required><br><br>
+
+        <button type="submit">Update Blood Stock</button>
+    </form>
+
+    <a href="/bloodstocks">Back to Blood Stock List</a>
+    
+</body>
+</html>

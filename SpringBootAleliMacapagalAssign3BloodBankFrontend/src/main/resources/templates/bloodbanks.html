@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Blood Banks</title>
+</head>
+<body>
+    <!-- Home Link -->
+    <a href="/">Home</a> <!-- Links to index.html -->
+    
+    <h1>Blood Banks List</h1>
+
+    <!-- Add Blood Banks Form -->
+    <form action="/bloodbanks" method="POST">
+        <label for="bloodbankName">Blood Bank Name:</label>
+        <input type="text" id="bloodbankName" name="bloodbankName" required><br><br>    
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required><br><br>
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required><br><br>        
+        <label for="phone">Phone:</label>
+        <input type="number" id="phone" name="phone" required><br><br>
+        <label for="website">Website:</label>
+        <input type="text" id="website" name="website" required><br><br>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" required><br><br>
+        <button type="submit">Add Blood Bank</button>
+    </form>
+    
+    <!-- Table for Displaying Blood Banks -->    
+    <h2>Current Blood Banks</h2>    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Phone</th>
+                <th>Website</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="bloodbank : ${bloodbanks}">
+	        <td th:text="${bloodbank.id}"></td>
+	        <td th:text="${bloodbank.bloodbankName}"></td>
+	        <td th:text="${bloodbank.address}"></td>
+	        <td th:text="${bloodbank.city}"></td>
+	        <td th:text="${bloodbank.phone}"></td>
+	        <td th:text="${bloodbank.website}"></td>
+	        <td th:text="${bloodbank.email}"></td>
+	        <td>
+	        	<!-- Edit Button -->
+	         	<a th:href="@{/bloodbanks/edit/{id}(id=${bloodbank.id})}">Edit</a>
+	
+	         	<!-- Delete Button -->
+	         	<a th:href="@{/bloodbanks/delete/{id}(id=${bloodbank.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(bloodbanks)}">
+        	<td colspan="8">No Blood Banks available.</td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>
